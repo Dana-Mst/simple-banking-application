@@ -1,9 +1,10 @@
 package com.tradebrite.simplebankingapplication.model;
 
 
-public enum TansactionType {
+public enum TransactionType {
     DEPOSIT,
-    WIDTHRAW
+    WITHDRAW,
+    TRANSFER
 
 
 

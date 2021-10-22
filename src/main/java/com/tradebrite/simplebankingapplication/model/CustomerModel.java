@@ -1,2 +1,28 @@
-package com.tradebrite.simplebankingapplication.model;public class CustomerModel {
+package com.tradebrite.simplebankingapplication.model;
+
+import lombok.*;
+
+import javax.persistence.*;
+
+@Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class CustomerModel {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
+    @Column
+    private CustomerType customerType;
+
+
+
+
+
+
+
 }
