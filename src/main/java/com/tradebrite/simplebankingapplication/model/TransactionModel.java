@@ -5,7 +5,6 @@ import lombok.*;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.Currency;
 
 @Entity
 @Getter
@@ -28,7 +27,12 @@ public class TransactionModel {
     @Column
     private LocalDateTime date;
 
-//    TODO add currency property
+    @ManyToOne
+    @JoinColumn(name = "accountNumber", referencedColumnName = "accountNumber")
+    private AccountModel accountModel;
+
+
+//    TODO after MVP : add currency property;
 
 
 

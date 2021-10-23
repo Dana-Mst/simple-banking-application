@@ -1,13 +1,11 @@
 package com.tradebrite.simplebankingapplication.model;
 
 import lombok.*;
-import org.springframework.beans.propertyeditors.CurrencyEditor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
-import java.util.Currency;
 import java.util.List;
 
 @Entity
@@ -22,26 +20,22 @@ public class AccountModel {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-//    TODO for v2: evaluate option account number as primary key
-
-//    TODO add customerId property and the relation
+    @Column
+    @Positive
+    private BigDecimal currentBalance;
 
     @Column
     @NotNull
     private String accountNumber;
 
-    @Column
-    private Currency currency;
-
-    @Column
-    @Positive
-    private BigDecimal currentBalance;
-
-    @Transient
+    @OneToMany(mappedBy = "accountModel")
     private List<TransactionModel> transactions;
 
 
-
-
-
+    /*
+    TODO after the MVP:
+     * evaluate option account number as primary key
+     * add customerId property and the relation
+     * add currency property
+    */
 }

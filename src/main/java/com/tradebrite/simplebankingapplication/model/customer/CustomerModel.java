@@ -1,4 +1,4 @@
-package com.tradebrite.simplebankingapplication.model;
+/*package com.tradebrite.simplebankingapplication.model.customer;
 
 import lombok.*;
 
@@ -10,6 +10,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+
 public class CustomerModel {
 
     @Id
@@ -20,9 +21,4 @@ public class CustomerModel {
     private CustomerType customerType;
 
 
-
-
-
-
-
-}
+}*/
