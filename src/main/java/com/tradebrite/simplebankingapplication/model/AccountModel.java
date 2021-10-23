@@ -6,6 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -21,12 +22,15 @@ public class AccountModel {
     private Long id;
 
     @Column
-    @Positive
-    private BigDecimal currentBalance;
-
-    @Column
     @NotNull
     private String accountNumber;
+
+    @Column
+    private Date createDate;
+
+    @Column
+    @Positive
+    private BigDecimal currentBalance;
 
     @OneToMany(mappedBy = "accountModel")
     private List<TransactionModel> transactions;
