@@ -1,5 +1,6 @@
 package com.tradebrite.simplebankingapplication.model;
 
+import com.tradebrite.simplebankingapplication.model.customer.CustomerModel;
 import lombok.*;
 
 import javax.persistence.*;
@@ -8,6 +9,7 @@ import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -34,6 +36,9 @@ public class AccountModel {
 
     @OneToMany(mappedBy = "accountModel")
     private List<TransactionModel> transactions;
+
+//    @ManyToMany(mappedBy = "accounts")
+//    private Set<CustomerModel> customers;
 
 
     /*
