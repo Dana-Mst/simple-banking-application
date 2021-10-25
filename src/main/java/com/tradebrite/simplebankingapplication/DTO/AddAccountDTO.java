@@ -1,12 +1,8 @@
 package com.tradebrite.simplebankingapplication.DTO;
 
-
-import com.tradebrite.simplebankingapplication.model.customer.CustomerModel;
 import lombok.*;
 
 import javax.validation.constraints.NotNull;
-import java.math.BigDecimal;
-import java.util.Date;
 
 @Getter
 @Setter
@@ -17,9 +13,6 @@ import java.util.Date;
 public class AddAccountDTO {
 
     @NotNull
-    private CustomerModel customer;
+    private Long customerId;
 
-    private Date createDate;
-
-    private BigDecimal currentBalance;
 }

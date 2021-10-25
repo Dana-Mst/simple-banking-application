@@ -29,8 +29,10 @@ public class CustomerService {
 
         return convertToDTO(customerSavedInDb);
 
+    }
 
-
+    public CustomerModel getCustomer(Long id) {
+        return customerRepository.findById(id).orElse(null);
     }
 
     public CustomerModel saveCustomer(CustomerModel customerModel) {
@@ -64,6 +66,7 @@ public class CustomerService {
                 .email(customerModel.getEmail())
                 .phoneNumber(customerModel.getPhoneNumber())
                 .address(customerModel.getAddress())
+                .accounts(customerModel.getAccounts())
                 .build();
     }
 }

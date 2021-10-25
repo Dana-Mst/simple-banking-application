@@ -3,7 +3,6 @@ package com.tradebrite.simplebankingapplication.model;
 import lombok.*;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
@@ -19,7 +18,7 @@ public class TransactionModel {
     private Long id;
 
     @Column
-    private BigDecimal transactionAmount;
+    private Double transactionAmount;
 
     @Column
     private TransactionType transactionType;

@@ -5,6 +5,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -38,17 +39,14 @@ public class CustomerModel {
     @Column
     private String address;
 
+    @Column
     private Date createDate;
 
-//    @Column
-//    private CustomerType customerType;
+    @OneToMany(mappedBy = "customerModel")
+    private Set<AccountModel> accounts;
 
-//    @ManyToMany(cascade = CascadeType.ALL)
-//    @JoinTable(
-//            name="Customer_Account",
-//            joinColumns = {@JoinColumn(name = "customer_id")},
-//            inverseJoinColumns = {@JoinColumn(name = "account_id")}
-//    )
-//    private Set<AccountModel> accounts;
+
+
+
 
 }

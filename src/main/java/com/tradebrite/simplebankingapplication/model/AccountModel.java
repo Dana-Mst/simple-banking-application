@@ -4,12 +4,8 @@ import com.tradebrite.simplebankingapplication.model.customer.CustomerModel;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
-import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Getter
@@ -24,21 +20,20 @@ public class AccountModel {
     private Long id;
 
     @Column
-    @NotNull
     private String accountNumber;
 
     @Column
     private Date createDate;
 
     @Column
-    @Positive
-    private BigDecimal currentBalance;
+    private Double currentBalance;
 
     @OneToMany(mappedBy = "accountModel")
     private List<TransactionModel> transactions;
 
-//    @ManyToMany(mappedBy = "accounts")
-//    private Set<CustomerModel> customers;
+    @ManyToOne
+    @JoinColumn(name = "customerModel_id")
+    private CustomerModel customerModel;
 
 
     /*
