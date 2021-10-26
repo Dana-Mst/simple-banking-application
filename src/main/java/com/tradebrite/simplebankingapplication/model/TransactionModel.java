@@ -33,9 +33,4 @@ public class TransactionModel {
     @Transient
     private AccountModel toAccount;
 
-
-//    TODO after MVP : add currency property;
-
-
-
 }

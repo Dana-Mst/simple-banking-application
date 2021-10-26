@@ -45,10 +45,10 @@ public class TransactionController {
 
     @PutMapping("/transfer")
     public ResponseEntity transferBetweenAccounts(@RequestBody @Valid TransferTransactionDTO transferTransactionDTO) {
-        Boolean result = transactionService.transferBetweenAccounts(transferTransactionDTO);
+        GenericResponse result = transactionService.transferBetweenAccounts(transferTransactionDTO);
 
-        if(result == Boolean.FALSE) {
-            return new ResponseEntity(ErrorMessage.ERROR_COMPLETING_THE_TRANSACTION, new HttpHeaders(), HttpStatus.BAD_REQUEST);
+        if(result.getStatus() != HttpStatus.OK) {
+            return new ResponseEntity(result.getMessage(), new HttpHeaders(), result.getStatus());
 
         }
         return new ResponseEntity(result, new HttpHeaders(), HttpStatus.OK);

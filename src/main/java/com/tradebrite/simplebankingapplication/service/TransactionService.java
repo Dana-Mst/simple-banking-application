@@ -14,7 +14,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.util.SerializationUtils;
 
 import javax.transaction.Transactional;
 import java.time.Instant;
@@ -81,18 +80,24 @@ public class TransactionService {
                 .build());
     }
 
-    public Boolean transferBetweenAccounts(TransferTransactionDTO transferTransactionDTO) {
+    public GenericResponse transferBetweenAccounts(TransferTransactionDTO transferTransactionDTO) {
         Optional<AccountModel> fromAccount = accountService.getAccount(transferTransactionDTO.getAccountId());
         Optional<AccountModel> toAccount = accountService.getAccount(transferTransactionDTO.getToAccountId());
 
         if (fromAccount.isEmpty() || toAccount.isEmpty() ) {
-            return Boolean.FALSE;
+            return GenericResponse.builder()
+                    .status(HttpStatus.BAD_REQUEST)
+                    .message(ErrorMessage.ACCOUNT_NOT_FOUND_IN_DB)
+                    .build();
         }
         Double initialBalanceFromAccount = fromAccount.get().getCurrentBalance();
         Double initialBalanceToAccount = toAccount.get().getCurrentBalance();
         Double transferredAmount = transferTransactionDTO.getAmount();
         if ( transferredAmount > initialBalanceFromAccount) {
-            return Boolean.FALSE;
+            return GenericResponse.builder()
+                    .status(HttpStatus.BAD_REQUEST)
+                    .message(ErrorMessage.INSUFFICIENT_MONEY)
+                    .build();
         }
         fromAccount.get().setCurrentBalance(initialBalanceFromAccount - transferredAmount);
         toAccount.get().setCurrentBalance(initialBalanceToAccount + transferredAmount);
@@ -109,7 +114,9 @@ public class TransactionService {
 
         saveTransaction(transactionSentToSave);
         saveTransaction(received);
-        return Boolean.TRUE;
+        return GenericResponse.builder()
+                .status(HttpStatus.OK)
+                .build();
     }
 
     public Boolean saveTransaction(TransactionModel transactionModel) {
@@ -145,22 +152,4 @@ public class TransactionService {
                 .build();
     }
 
-
-
-/*    public Boolean withrawMoney(){
-        *//*
-        * verifica daca exista contul
-        * daca suma retrasaa este in cont
-        * daca da update current balance
-        * daca nu - eroare nu enu exista fonduri suficiente*//*
-    }*/
-/*    public Boolean transferMoney(){
-        transfer between accounts DTO
-        * verific existenta celor 2 conturi
-        * verific ca cel care plateste are bani suficienti
-        * scad contul celui care plateste
-        * adun in contul celui care primeste
-        * daca .. erori
-        *
-    }*/
 }
