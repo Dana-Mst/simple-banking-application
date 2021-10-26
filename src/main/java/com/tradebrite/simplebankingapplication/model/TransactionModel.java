@@ -3,7 +3,7 @@ package com.tradebrite.simplebankingapplication.model;
 import lombok.*;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 @Getter
@@ -24,11 +24,14 @@ public class TransactionModel {
     private TransactionType transactionType;
 
     @Column
-    private LocalDateTime date;
+    private Date date;
 
     @ManyToOne
-    @JoinColumn(name = "accountNumber", referencedColumnName = "accountNumber")
+    @JoinColumn(name = "accountId", referencedColumnName = "id")
     private AccountModel accountModel;
+
+    @Transient
+    private AccountModel toAccount;
 
 
 //    TODO after MVP : add currency property;

@@ -28,7 +28,6 @@ public class CustomerService {
         }
 
         return convertToDTO(customerSavedInDb);
-
     }
 
     public CustomerModel getCustomer(Long id) {

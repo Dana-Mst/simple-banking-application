@@ -9,9 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -32,5 +30,16 @@ public class AccountController {
         }
         return new ResponseEntity(result, new HttpHeaders(), HttpStatus.OK);
     }
+
+    @GetMapping("/getBalance/{accountId}")
+    public ResponseEntity getBalance(@PathVariable Long accountId){
+        AccountModelDTO result = accountService.getBalance(accountId);
+
+        if (result.isAccountValid().equals(Boolean.FALSE)) {
+            return new ResponseEntity(ErrorMessage.ACCOUNT_NOT_FOUND_IN_DB, new HttpHeaders(), HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity(result, new HttpHeaders(), HttpStatus.OK);
+    }
+
 
 }

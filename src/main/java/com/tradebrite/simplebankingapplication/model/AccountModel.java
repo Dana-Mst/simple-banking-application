@@ -22,6 +22,9 @@ public class AccountModel {
     @Column
     private String accountNumber;
 
+/*    @Column
+    private Long customerId;*/
+
     @Column
     private Date createDate;
 

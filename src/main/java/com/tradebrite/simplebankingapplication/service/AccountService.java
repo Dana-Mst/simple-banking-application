@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Date;
 import java.time.Instant;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -20,6 +21,12 @@ public class AccountService {
 
     @Autowired
     private CustomerService customerService;
+
+//  public AccountModelDTO getBalance()metoda pentru balance.
+
+    public Optional<AccountModel> getAccount(Long id) {
+        return accountRepository.findById(id);
+    }
 
     public AccountModelDTO addNewAccount(AddAccountDTO addAccountDTO) {
         AccountModel accountModel = convertToModel(addAccountDTO);
@@ -32,6 +39,13 @@ public class AccountService {
         }
 
         return convertToDTO(accountSavedInDb);
+    }
+
+    public AccountModelDTO getBalance(Long accountId) {
+        Optional<AccountModel> accountModel = getAccount(accountId);
+        return accountModel.map(
+                acc -> convertToDTO(accountModel.get())
+        ).orElse(AccountModelDTO.builder().build());
 
     }
 
@@ -48,9 +62,9 @@ public class AccountService {
 
     public AccountModelDTO convertToDTO(AccountModel accountModel) {
         return AccountModelDTO.builder()
-                .accountNumber(accountModel.getAccountNumber())
                 .createDate(accountModel.getCreateDate())
                 .currentBalance(accountModel.getCurrentBalance())
+                .customerId(accountModel.getCustomerModel().getId())
                 .build();
     }
 

@@ -14,6 +14,8 @@ import java.util.Date;
 @Builder
 public class AccountModelDTO {
 
+    private Long id;
+
     @Size(min=24, max=24)
     private String accountNumber;
 
@@ -25,4 +27,7 @@ public class AccountModelDTO {
     private Double currentBalance;
 
 
+    public Boolean isAccountValid(){
+        return customerId != null;
+    }
 }
