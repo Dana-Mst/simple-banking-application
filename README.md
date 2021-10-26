@@ -10,7 +10,7 @@ You are tasked with creating a simple banking application that will handle accou
 
 - Transferring amount between accounts - Requesting the current balance of account
 
-###Some additional notes:
+### Some additional notes:
 
 - should be a spring/spring-boot application.
 
